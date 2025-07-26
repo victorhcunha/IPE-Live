@@ -3,7 +3,7 @@ var query = document.querySelector.bind(document),
     queryAll = document.querySelectorAll.bind(document),
     queryId = document.getElementById.bind(document),
     queryName = document.getElementsByName.bind(document),
-    servidor = "10.0.0.253:3000",
+    servidor = "localhost:3000",
     empresa = "IPE.Transmissão",
     socket = io(servidor, { transports: ["polling", "websocket"] }),
     atual;
