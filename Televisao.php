@@ -31,6 +31,7 @@
     <!-- ---------------------------------------------------------------------------------- -->
     <title>Projetor</title>
     <link rel="stylesheet" href="Projetor.css">
+    <link rel="stylesheet" href="Televisao.css">
     <script src="js\Televisao.js" telaPrincipal="<?php echo array_key_first($_GET) ?? ''; ?>"></script>
     <!-- ---------------------------------------------------------------------------------- -->
 

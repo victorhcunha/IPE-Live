@@ -13,11 +13,12 @@ socket.on("connect", () => {
 });
 
 function updateClock() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    fetch('hora.php')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('clock').textContent = data.hora;
+        })
+        .catch(error => console.error('Erro ao obter hora do servidor:', error));
 }
 
 const visibilidadeRelogio = () => {
