@@ -156,4 +156,42 @@ function mensagem(mensagem) {
             if ($(`mensagem>rodape`).html(mensagem.corpo).css('display') !== 'none') $(`mensagem>rodape`).fadeOut(200, visibilidadeRelogio);
         }
     }
+
+
+    function ajustarFonteElemento(elemento, tamanhoOriginal) {
+    const minFont = 10;
+    let fontSize = tamanhoOriginal;
+
+    elemento.style.fontSize = fontSize + "px";
+
+    // Verifica se o conteúdo ultrapassa a tela
+    const precisaReduzir = () => (
+        elemento.scrollHeight > window.innerHeight || elemento.scrollWidth > window.innerWidth
+    );
+
+    while (precisaReduzir() && fontSize > minFont) {
+        fontSize--;
+        elemento.style.fontSize = fontSize + "px";
+    }
+}
+
+function ajustarTodos() {
+    const elementos = document.querySelectorAll('mensagem, passagem, louvor');
+
+    elementos.forEach(tag => {
+        if ($(tag).is(':visible')) {
+            const filhos = tag.querySelectorAll('titulo, corpo, rodape');
+
+            filhos.forEach(el => {
+                const estilo = getComputedStyle(el);
+                const tamanhoOriginal = parseFloat(estilo.fontSize);
+                ajustarFonteElemento(el, tamanhoOriginal);
+            });
+        }
+    });
+}
+
+window.addEventListener('load', ajustarTodos);
+window.addEventListener('resize', ajustarTodos);
+
 };
