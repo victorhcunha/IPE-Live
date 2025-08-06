@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcrição Fullscreen</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="fullscreen-body">
+    <div id="transcription-output" class="fullscreen-text">
+        Aguardando transcrição...
+    </div>
+
+    <script>
+        const transcriptionOutput = document.getElementById('transcription-output');
+        const websocketUrl = `ws://${window.location.hostname}:3001/ws`; // Conecta ao servidor WebSocket na porta 3001
+
+        let ws;
+
+        function connectWebSocket() {
+            ws = new WebSocket(websocketUrl);
+
+            ws.onopen = () => {
+                console.log('Conectado ao WebSocket.');
+                transcriptionOutput.textContent = 'Conectado. Aguardando áudio...';
+            };
+
+            ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    let displayText = '';
+
+                    if (data.original && data.traduzido) {
+                        // Modo bilíngue ou apenas traduzido/original
+                        // Verifica se MODO_BILINGUE está ativo no backend para decidir a exibição
+                        // Por simplicidade aqui, vamos exibir ambos se ambos estiverem presentes
+                        displayText = `${data.original} (${data.traduzido})`;
+                    } else if (data.original) {
+                        displayText = data.original;
+                    } else if (data.traduzido) {
+                        displayText = data.traduzido;
+                    }
+
+                    transcriptionOutput.textContent = displayText;
+                } catch (e) {
+                    console.error('Erro ao parsear JSON do WebSocket:', e, event.data);
+                    transcriptionOutput.textContent = `Erro: ${event.data}`;
+                }
+            };
+
+            ws.onclose = (event) => {
+                console.log('Desconectado do WebSocket.', event.reason);
+                transcriptionOutput.textContent = 'Desconectado. Tentando reconectar...';
+                setTimeout(connectWebSocket, 3000); // Tenta reconectar após 3 segundos
+            };
+
+            ws.onerror = (error) => {
+                console.error('Erro no WebSocket:', error);
+                transcriptionOutput.textContent = 'Erro de conexão. Verifique o console.';
+                ws.close(); // Fecha a conexão para tentar reconectar
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', connectWebSocket);
+    </script>
+</body>
+</html>

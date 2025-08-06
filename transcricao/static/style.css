@@ -1,0 +1,77 @@
+/* static/style.css */
+
+/* Estilos gerais para o corpo da página */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Evita barras de rolagem */
+}
+
+/* Estilos para a página Fullscreen */
+.fullscreen-body {
+    background-color: #000; /* Fundo preto */
+    color: #fff; /* Texto branco */
+    height: 100vh; /* Ocupa a altura total da viewport */
+    width: 100vw; /* Ocupa a largura total da viewport */
+}
+
+.fullscreen-text {
+    font-size: 5vw; /* Tamanho da fonte responsivo */
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box; /* Inclui padding no tamanho total */
+    word-wrap: break-word; /* Quebra palavras longas */
+    white-space: normal; /* Permite quebra de linha */
+    max-width: 90%; /* Limita a largura do texto */
+}
+
+/* Estilos para a página Rodapé */
+.rodape-body {
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    color: #fff; /* Texto branco */
+    position: fixed; /* Fixa na parte inferior */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Ocupa a largura total */
+    height: auto; /* Altura ajustável ao conteúdo */
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: flex; /* Para centralizar o texto verticalmente */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+}
+
+.rodape-text {
+    font-size: 2.5vw; /* Tamanho da fonte responsivo */
+    text-align: center;
+    word-wrap: break-word;
+    white-space: normal;
+    max-width: 95%;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .fullscreen-text {
+        font-size: 7vw; /* Aumenta a fonte para melhor legibilidade em telas pequenas */
+    }
+
+    .rodape-text {
+        font-size: 4vw; /* Aumenta a fonte para melhor legibilidade em telas pequenas */
+    }
+}
+
+/* Responsividade para telas muito pequenas (celulares) */
+@media (max-width: 480px) {
+    .fullscreen-text {
+        font-size: 9vw;
+    }
+
+    .rodape-text {
+        font-size: 5vw;
+    }
+}
