@@ -24,7 +24,10 @@ function updateClock() {
 let clockInterval = null;
 
 const visibilidadeRelogio = () => {
-    if (
+    if ($('#clock').is(':visible')) {
+        $('#clock').fadeOut(200);
+    }
+    else if (
         $('passagem').is(':hidden') &&
         $('louvor').is(':hidden')
     ) {
