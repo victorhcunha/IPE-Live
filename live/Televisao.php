@@ -45,7 +45,7 @@
     </style>
 </head>
 
-<body onload="$('body>*:not(#clock)').fadeOut(); inicio();">
+<body onload="$(`body>*`).fadeOut(); inicio();">
 
     <passagem>
         <titulo></titulo>
