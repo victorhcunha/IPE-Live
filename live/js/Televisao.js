@@ -21,6 +21,8 @@ function updateClock() {
         .catch(error => console.error('Erro ao obter hora do servidor:', error));
 }
 
+let clockInterval = null;
+
 const visibilidadeRelogio = () => {
     if (
         $('passagem').is(':hidden') &&
@@ -28,7 +30,11 @@ const visibilidadeRelogio = () => {
     ) {
         $('#clock').fadeIn(200);
         updateClock();
-        setInterval(updateClock, 1000);
+
+        if (!clockInterval) {
+            clockInterval = setInterval(updateClock, 1000);
+        }
+
     } else {
         $('#clock').fadeOut(200);
     }
