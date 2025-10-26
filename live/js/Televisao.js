@@ -111,7 +111,6 @@ const inicio = () => {
     //     })
 
     // };
-    setInterval(visibilidadeRelogio, 2000);
 
     if (/android|ipad|iphone|ipod/i.test(navigator.userAgent.toLowerCase())) $('body>*:not(#mensagem)').addClass('scrollJC');
 }
