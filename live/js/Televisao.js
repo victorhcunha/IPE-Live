@@ -48,17 +48,14 @@ socket.onAny((aplicativo, eventName, args) => {
         if (eventName === "fecharJanela") {
             $(`body>*:visible`).fadeOut(200, function () {
                 $(`body>*:visible>*`).html('');
-                visibilidadeRelogio();
             });
         } else if (eventName === "fecharBiblia") {
-            visibilidadeRelogio();
             if (atual === 'Mensagem') {
                 if ($(`mensagem>rodape`).html(mensagem.corpo).css('display') !== 'none') $(`mensagem>rodape`).fadeOut(200);
             } else {
                 $(`body>*:visible`).fadeOut(200, function () {
                     // this.querySelectorAll("*").forEach(obj => obj.innerhtml = "");
                     $(`body>*:visible>*`).html('');
-                    visibilidadeRelogio();
                 });
             }
         } else if (eventName === "Alerta") {
@@ -86,8 +83,7 @@ socket.onAny((aplicativo, eventName, args) => {
             $(`body>*:visible`).fadeOut(200, function () {
                 // this.querySelectorAll("*").forEach(obj => obj.innerhtml = "");
                 $(`body>*:visible>*`).html('');
-                visibilidadeRelogio();
-            });            
+            });
         } else if (eventName === "pegarDadosMensagem") {
         } else if (eventName === "dadosMensagem") {
             $('mensagem>titulo').html(args.titulo);
